@@ -1,0 +1,33 @@
+#include<numeric>
+using namespace std;
+class Solution {
+public:
+    int garbageCollection(vector<string>& garbage, vector<int>& travel) {
+        int n=garbage.size();
+        int ans=0;
+        bool hasG=false;
+        bool hasM=false;
+        bool hasP=false;
+        for(int i=n-1;i>=0;--i){
+            if(!hasG && garbage[i].find('G')!=string::npos){
+                hasG=true;
+                ans+=accumulate(travel.begin(), travel.begin()+i, 0);
+            }
+            if(!hasP && garbage[i].find('P')!=string::npos){
+                hasP=true;
+                ans+=accumulate(travel.begin(), travel.begin()+i,0);
+            }
+            if(!hasM && garbage[i].find('M')!=string::npos){
+                hasM=true;
+                ans+=accumulate(travel.begin(), travel.begin()+i,0);
+            }
+            if(hasG && hasP && hasM){
+                break;
+            }
+        }
+        return ans+accumulate(garbage.begin(), garbage.end(),0, [](int sum, const string str)
+        {return sum+str.size();
+        });
+        
+    }
+};
