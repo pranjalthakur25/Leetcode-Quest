@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int ans=0;
+        while(n!=0){
+            ans+=n&1;
+//here updated n is traversed from last and if it is 1 then it will return 0 otherwise 1
+            n>>=1;
+//incrementing and it is traversed from last
+        }
+        return ans;
+    }
+};
