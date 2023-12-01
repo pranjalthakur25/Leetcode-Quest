@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int reverse(int n) {
+        long ans=0;
+        bool flag=true;
+        if(n<0){
+            n=abs(n);
+            flag=false;
+        }
+        while(n!=0){
+            int rem=n%10;
+            ans=ans*10+rem;
+// includes a check for potential overflow during the loop. If an overflow is detected, the function returns 0
+            if (ans > INT_MAX || ans < INT_MIN) {
+            return 0;}
+            n=n/10;
+
+        }
+        if(flag==false){
+            return -ans;
+        }
+        return ans;
+    }
+};
