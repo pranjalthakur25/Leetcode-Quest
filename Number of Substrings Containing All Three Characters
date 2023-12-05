@@ -1,0 +1,22 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int st=0, end=2, count=0;
+        int len=s.length();
+        if(len<=3){
+            if(len==3&&s.contains("a")&&s.contains("b")&&s.contains("c")){
+                return 1;
+            }
+            return 0;
+        }
+        while(end<len){
+            String temp=s.substring(st, end+1);
+            while(st<=end && end-st>=3-1 && temp.contains("a")&&temp.contains("b")&&temp.contains("c")){
+                count+=1+len-(end+1);
+                st++;
+                temp=s.substring(st, end+1);
+            }
+            end++;
+        }
+        return count;
+    }
+}
