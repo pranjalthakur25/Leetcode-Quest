@@ -1,0 +1,26 @@
+//sliding window
+class Solution {
+public:
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+       return atmost(nums, k)-atmost(nums, k-1); 
+    }
+    int atmost(vector<int>&nums, int k){
+        unordered_map<int, int> mpp;
+        int res=0;
+        int i=0;
+        for(int j=0;j<nums.size();j++){
+            if(!mpp[nums[j]]++){
+//check if it not equal to zero 
+                k--;
+            }
+            while(k<0){
+                if(!--mpp[nums[i]]){
+                    k++;
+                }
+                i++;
+            }
+            res+=j-i+1;
+        }
+        return res;
+    }
+};
