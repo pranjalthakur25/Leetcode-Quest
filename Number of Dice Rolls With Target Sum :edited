@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int numRollsToTarget(int n, int k, int target) {
+        // vector<vector<long long>> dp(n + 1, vector<long long>(target + 1, -1));
+        // return solvebytop(n, k, target, dp);
+        return solvebybottom(n, k, target);
+    }
+    int solvebybottom(int dice, int face, int target) {
+        vector<vector<long long>> dp(dice + 1, vector<long long>(target + 1, 0));
+        dp[0][0] = 1;
+
+        for (int d = 1; d <= dice; d++) {
+            for (int t = 1; t <= target; t++) {
+                long long ans = 0;
+                for (int i = 1; i <= face; i++) {
+                    if (t - i >= 0) {
+                        ans = (ans + dp[d - 1][t - i]) % MOD;
+                    }
+                }
+                dp[d][t] = ans;
+            }
+        }
+        return dp[dice][target];
+    }
+
+    int solvebytop(int dice, int face, int target, vector<vector<long long>>& dp) {
+        // Base cases
+        if (target < 0 || (dice == 0 && target != 0) || (target == 0 && dice != 0)) {
+            return 0;
+        }
+        if (dice == 0 && target == 0) {
+            return 1;
+        }
+
+        if (dp[dice][target] != -1) {
+            return dp[dice][target];
+        }
+
+        int sum = 0;
+        for (int i = 1; i <= face; i++) {
+            sum = (sum + solvebytop(dice - 1, face, target - i, dp)) % MOD;
+        }
+
+        return dp[dice][target] = sum;
+    }
+
+private:
+    const int MOD = 1000000007;
+};
