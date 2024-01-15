@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        unordered_map<int, int> lost_match;
+        vector<int> onelose;
+        vector<int> notlost;
+        for(int i=0;i<matches.size();i++){
+            int lose=matches[i][1];
+            lost_match[lose]++;
+        }
+        for(int i=0;i<matches.size();i++){
+            int win=matches[i][0];
+            int looser=matches[i][1];
+            if(lost_match.find(win)==lost_match.end()){
+                notlost.push_back(win);
+                lost_match[win]=7;//to avoid repeatation 
+            }
+            if(lost_match[looser]==1){
+                onelose.push_back(looser);
+            }
+        }
+        sort(notlost.begin(), notlost.end());
+        sort(onelose.begin(), onelose.end());
+        return {notlost, onelose};
+    }
+};
