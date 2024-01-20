@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minimumCost(vector<int>& nums) {
+        int n=nums.size();
+        int sum=0;
+        int prev=INT_MAX;
+        int mini=INT_MAX;
+        for(int i=1;i<n;i++){
+            if(nums[i]<=mini){
+                prev=mini;
+                mini=nums[i];
+            }
+            else{
+                if(nums[i]<prev){
+                    prev=nums[i];
+                }
+            }
+        }
+       
+        sum=nums[0]+prev+mini;
+        return sum;
+        
+    }
+};
