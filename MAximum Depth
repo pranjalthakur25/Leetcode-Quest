@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxDepth(string s) {
+        int curdepth=0, maxdepth=0;
+        for(auto i :s){
+            if(i=='('){
+                curdepth+=1;
+                maxdepth=max(maxdepth,curdepth);
+            }
+            else if(i==')'){
+                curdepth--;
+            }
+        }
+        return maxdepth;
+    }
+};
