@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char, int> rmp;
+        rmp['I']=1;
+        rmp['V']=5;
+        rmp['X']=10;
+        rmp['L']=50;
+        rmp['C']=100;
+        rmp['D']=500;
+        rmp['M']=1000;
+        int ans=0;
+
+        for(int i=0;i<s.size();i++){
+            if(rmp[s[i]]<rmp[s[i+1]]){
+                ans-=rmp[s[i]];
+            }
+            else{
+                ans+=rmp[s[i]];
+            }
+        }
+        return ans;
+
+    }
+};
