@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int beautySum(string s) {
+        int ans=0;
+        for(int i=0;i<s.size();i++){
+            unordered_map<char, int> mpp;
+            for(int j=i;j<s.size();j++){
+                mpp[s[j]]++;
+                int lf=INT_MAX;
+                int mf=INT_MIN;
+                for(auto it:mpp){
+                    lf=min(lf,it.second);
+                    mf=max(mf, it.second);
+                }
+                ans+=mf-lf;
+            }
+        }
+        return ans;
+    }
+};
