@@ -1,0 +1,18 @@
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        # Negative numbers are not palindromes
+        if x < 0:
+            return False
+
+        reverse_num = 0
+        temp = x
+        
+        while temp != 0:
+            digit = temp % 10
+            reverse_num = reverse_num * 10 + digit
+            temp //= 10
+
+        return reverse_num == x
+
+
+        
